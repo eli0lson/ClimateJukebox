@@ -1,23 +1,61 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
+
 import './App.css';
 
+import { createPlaylist } from './actions';
+
 function App() {
+
+  const [link, setLink] = useState('');
+
+  const [image, setImage] = useState({});
+
+
+  const handleClick = async () => {
+    const playlistStuff = await createPlaylist();
+    console.log(playlistStuff)
+    const { playlistLink, images } = playlistStuff;
+    setLink(playlistLink);
+    setImage(images[1]);
+  }
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        {/* <img src={logo} className="App-logo" alt="logo" /> */}
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          make a random playlist :)
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
       </header>
+      <div className="app-body">
+        {link.length === 0 &&
+        <div>
+          <button
+            className="App-link"
+            href="#"
+            onClick={() => handleClick()}
+          >
+            ok here we go
+          </button>
+        </div>
+        }
+        {link?.length > 0 &&
+          <div>
+            <div className="App-link">
+              <a 
+                className="App-link"
+                href={link} 
+                target='_blank' 
+                rel="noreferrer">
+                  click here to go to the playlist
+              </a>
+            </div>
+            <div>
+              <img src={image?.url} height={image?.height} width={image?.width} alt='playlist-cover'></img>
+            </div>
+          </div>
+        }
+      </div>
     </div>
   );
 }
