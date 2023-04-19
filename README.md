@@ -1,12 +1,10 @@
 # Climate Jukebox
 
+-- Work in Progress --
+
 A web app that works with your Spotify profile to create a playlist to reflect the weather in your location, including only songs in your library. 
 
-## Work in Progress
-
-- Conversion of [existing project](https://github.com/eli0lson/WeatherPlaylist) from Django/Python to React
-
------
+Conversion of [existing project](https://github.com/eli0lson/WeatherPlaylist) from Django/Python to React
 
 ## <ins>To Do</ins>
 - [x] Spotify API Calls
@@ -15,10 +13,8 @@ A web app that works with your Spotify profile to create a playlist to reflect t
 - [ ] Styling
 - [ ] One-time user location access
 
-## Nice to have at some point
+## <ins>Nice to have at some point</ins>
 - User-feedback-based learning
-
-----
 
 ## <ins>To run</ins> (NPM expected to be installed)
 - Clone Repo
