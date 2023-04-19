@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 
 import './App.css';
+import LocationForm from './location-form';
 
-import { createPlaylist } from './actions';
+import { createPlaylist, getWeather } from './actions';
 
 function App() {
 
@@ -10,9 +11,23 @@ function App() {
 
   const [image, setImage] = useState({});
 
+  // const handleClick = async () => {
+  //   const playlistStuff = await createPlaylist();
+  //   console.log(playlistStuff)
+  //   const { playlistLink, images } = playlistStuff;
+  //   setLink(playlistLink);
+  //   setImage(images[1]);
+  // }
 
-  const handleClick = async () => {
-    const playlistStuff = await createPlaylist();
+  const getWeatherAtLocation = async (city, state, country) => {
+    setLink('')
+    setImage({})
+    const { data } = await getWeather(city, state, country);
+    const weatherResponse = data[0]
+    const weatherCode = weatherResponse.weather.code;
+    const temp = weatherResponse.temp;
+
+    const playlistStuff = await createPlaylist(weatherCode, temp, city);
     console.log(playlistStuff)
     const { playlistLink, images } = playlistStuff;
     setLink(playlistLink);
@@ -22,13 +37,15 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        {/* <img src={logo} className="App-logo" alt="logo" /> */}
         <p>
           make a random playlist :)
         </p>
       </header>
+      <div className="locationForm" >
+        <LocationForm getLocation={getWeatherAtLocation} />
+      </div>
       <div className="app-body">
-        {link.length === 0 &&
+        {/* {link.length === 0 &&
         <div>
           <button
             className="App-link"
@@ -38,7 +55,7 @@ function App() {
             ok here we go
           </button>
         </div>
-        }
+        } */}
         {link?.length > 0 &&
           <div>
             <div className="App-link">
